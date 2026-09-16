@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+$if(light)$
+<html class="light">
+$else$
+<html>
+$endif$
+<head>
+<meta charset="utf-8">
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ - $endif$$if(pagetitle)$$pagetitle$$endif$</title>
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+<link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&amp;family=Noto+Emoji:wght@300..700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+$if(css)$
+$for(css)$
+  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+$endfor$
+$else$
+  $if(ratio43)$
+  body.loaded {
+    height: 450px;
+    width: 600px;
+    margin-top: -225px;
+  }
+  $else$
+  body.loaded {
+    height: 450px;
+    width: 600px
+    margin-top: -225px;
+  }
+  $endif$
+</style>
+
+$endif$
+$if(math)$
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+<script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
+</head>
+<body>
+<div class="loading">Loading</div>
+$dzslides-core$
+<style>
+  $if(display-notes)$
+  [role="note"].display {
+    color: var(--primary);
+    background-color: var(--background);
+    opacity: 0.8;
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    font-size: 12px;
+    z-index: 15000;
+  }
+  $endif$
+</style>
+$if(title)$
+<section class="slide title-slide">
+  <div>
+  <h1 class="title">$title$</h1>
+  <h3 class="subtitle">$subtitle$</h3></h3>
+  <footer class="authors">
+  <div class="notes" role="note">
+      $introductory_notes$
+  </div>
+$for(author)$
+  <div class="author">$author.name$</div>
+$endfor$
+  </footer>
+  </div>
+</section>
+$endif$
+$if(overlay)$
+<div class="overlay">$overlay$</div>
+$endif$
+$for(include-before)$
+$include-before$
+$endfor$
+$body$
+$for(include-after)$
+$include-after$
+$endfor$
+
+<script>
+  function makeJumbo(slide) {
+    const nodes = slide.querySelectorAll(".jumbo");
+    for(let node of [... nodes]) {
+      node.style.transform = `scale(1);`;
+      const p = node.parentNode;
+      const pw = p.offsetWidth;
+      const w = node.offsetWidth;
+      node.style.transform = `scale($${pw / w})`;
+      p.style.height = (node.getBoundingClientRect().height / 2) + "px";
+    }
+  }
+
+  // When surrounding a list with an incremental marker in markdown,
+  // pandoc adds the .incremental to the ul tag and wraps it in a
+  // naked div tag, which messes up with the CSS, so we remove the
+  // intermediary div
+  const incrementals = document.querySelectorAll("div>.incremental");
+  for(let ul of [... incrementals]) {
+    ul.parentNode.replaceWith(ul);
+  }
+
+  document.querySelectorAll(".slide").forEach((node) => {
+    const obs = new MutationObserver((mutationList) => {
+      for(let m of mutationList) {
+        if(m.attributeName !== "aria-selected") break;
+        makeJumbo(node);
+        obs.disconnect();
+        return;
+      };
+    });
+    obs.observe(node, { attributes: true });
+    let c = [... node.children];
+    <!-- if(c.length > 1 && c.at(-1)?.getAttribute("role") === "note") { -->
+    <!--   c.at(-2).classList.add("centered"); -->
+    <!-- } -->
+    if (node.querySelector(".make-alternate")) {
+      node.classList.add("alternate");
+    }
+  });
+
+  document.body.addEventListener('keydown', function(e) {
+    if(e.keyCode === 78) { // n
+      e.preventDefault();
+      document.body.querySelectorAll("[role=note]").forEach((n) => {
+        n.classList.toggle("display");
+      });
+    }
+  });
+  $if(display-notes)$
+  document.body.querySelectorAll("[role=note]").forEach((n) => {
+    n.classList.add("display");
+  });
+  $endif$
+
+</script>
+
+</body>
+</html>

@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+$if(light)$
+<html class="light">
+$else$
+<html>
+$endif$
+<head>
+<meta charset="utf-8">
+$for(author-meta)$
+  <meta name="author" content="$author-meta$" />
+$endfor$
+$if(date-meta)$
+  <meta name="dcterms.date" content="$date-meta$" />
+$endif$
+  <title>$if(title-prefix)$$title-prefix$ - $endif$$if(pagetitle)$$pagetitle$$endif$</title>
+$if(highlighting-css)$
+  <style type="text/css">
+$highlighting-css$
+  </style>
+$endif$
+
+<link rel="icon" href="https://doscienceto.it/imgs/monogram.svg">
+
+<meta property="og:title" content="$pagetitle$" />
+<meta name="twitter:title" content="$pagetitle$" />
+
+<link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Playfair+Display:700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&amp;family=Noto+Emoji:wght@300..700&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+$if(css)$
+$for(css)$
+  <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
+$endfor$
+$endif$
+<link rel="stylesheet" href="./assets/css/standalone.css"/>
+$if(math)$
+  $math$
+$endif$
+$for(header-includes)$
+  $header-includes$
+$endfor$
+
+$if(title)$
+<div class= "pair"> 
+  <div class="slide title-slide">
+    <div>
+    <h1 class="title">$title$</h1>
+    <h3 class="subtitle">$subtitle$</h3></h3>
+    <footer class="authors">
+  $for(author)$
+    <div class="author">$author.name$</div>
+  $endfor$
+    </footer>
+    </div>
+  </div>
+  <div class="noteGroup">
+    <div class="notes">
+      $introductory_notes$
+    </div>
+  </div>
+</div>
+$endif$
+$body$
+</body>
+</html>

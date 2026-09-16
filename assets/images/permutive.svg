@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<svg
+   width="200"
+   height="200"
+   viewBox="0 0 200 200"
+   fill="none"
+   version="1.1"
+   id="svg12"
+   sodipodi:docname="permutive.svg"
+   inkscape:version="1.4.3 (0d15f75, 2025-12-25)"
+   xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+   xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+   xmlns="http://www.w3.org/2000/svg"
+   xmlns:svg="http://www.w3.org/2000/svg">
+  <defs
+     id="defs12" />
+  <sodipodi:namedview
+     id="namedview12"
+     pagecolor="#ffffff"
+     bordercolor="#000000"
+     borderopacity="0.25"
+     inkscape:showpageshadow="2"
+     inkscape:pageopacity="0.0"
+     inkscape:pagecheckerboard="0"
+     inkscape:deskcolor="#d1d1d1"
+     inkscape:zoom="2.5237299"
+     inkscape:cx="84.00265"
+     inkscape:cy="45.963714"
+     inkscape:window-width="1024"
+     inkscape:window-height="983"
+     inkscape:window-x="2240"
+     inkscape:window-y="368"
+     inkscape:window-maximized="0"
+     inkscape:current-layer="svg12" />
+  <g
+     id="g1"
+     transform="matrix(0.90058302,0,0,0.90058302,10,9.9416934)"
+     style="stroke-width:1.11039">
+    <path
+       d="M 25.801014,122.87498 0,122.87502 5.9837491e-6,200.00001 77.105711,199.99998 V 174.19285 C 53.601227,165.03143 34.932642,146.33144 25.802898,122.8731 Z"
+       fill="#1a1a1a"
+       id="path11"
+       style="stroke-width:1.11039" />
+    <path
+       d="M 109.76929,3.0050284e-5 C 60.004139,3.900826e-5 19.641151,40.372884 19.641217,90.150104 c 5e-6,11.538556 2.188364,22.564266 6.132783,32.698556 l 51.277424,-9e-5 v 51.29 c 10.131453,3.94572 21.154297,6.1343 32.690736,6.1343 49.76429,0 90.12781,-40.37283 90.12835,-90.149483 C 199.89743,40.372834 159.56056,-8.3654944e-5 109.76907,1.2249779e-7 Z"
+       fill="#1A1A1A"
+       id="path12"
+       style="fill:#1a1a1a;stroke-width:1.11039" />
+  </g>
+</svg>

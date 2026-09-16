@@ -1,0 +1,91 @@
+
+
+html {
+    background-color: white;
+}
+
+.pair {
+  display: block;
+  background-color: #eee;
+  border: 3px solid black;
+  box-shadow: 5px 5px 0  black;
+  margin: 2em auto;
+  width: fit-content;
+  position: relative;
+}
+
+
+@media screen and (max-device-width: 1309px){
+    .pair {
+        width: min-content;
+    }
+}
+
+
+.slide {
+    display: inline-block;
+    position: relative;
+    border: 3px solid black;
+    box-shadow: 5px 5px 0  black;
+    left: 0;
+    margin: 20px;
+    overflow: hidden;
+}
+
+.noteGroup {
+  display: inline-block;
+  top: 0;
+  width: 600px;
+  vertical-align: top;
+  padding: 1em;
+  color: #666;
+}
+
+a {
+  color: maroon
+}
+
+a::hover {
+  color: indianred;
+}
+
+p.preamble {
+  text-align: center;
+}
+
+.selflink {
+  display: block;
+  position: absolute;
+  right: 0.5em;
+  bottom: 0.5em;
+  width: 1.5em;
+  height: 1.5em;
+  background-image: url('../images/selflink.svg');
+  background-size: cover;
+}
+
+
+@media (prefers-color-scheme: dark) {
+  html, body {
+    background-color: #222;
+    color: #eee;
+  }
+
+  h1.topTitle {
+    color: indianred;
+  }
+
+  a {
+    color: indianred;
+  }
+
+  .pair {
+    border: 3px solid black;
+    box-shadow: 5px 5px 0 black;
+    background-color: #666;
+    color: #eee;
+  }
+  .noteGroup {
+    color: #eee;
+  }
+}

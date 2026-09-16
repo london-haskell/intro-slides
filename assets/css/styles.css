@@ -1,0 +1,390 @@
+@font-face {
+  font-family: "P22 Johnston Underground"; /* set name */
+  src: url(../fonts/underground.ttf); /* url of the font */
+}
+
+:root {
+  font-family: "P22 Johnston Underground", sans-serif;
+}
+html, .view body {
+  font-size: 16px;
+  color: #000;
+  font-family: "P22 Johnston Underground", sans-serif;
+  background-color: black;
+}
+body, .view section { background-color: white; }
+
+.view section .incremental {
+  visibility: visible;
+  opacity: 1;
+}
+section { left: -150%; }
+section[aria-selected] { left: 0; }
+section[aria-selected] ~ section { left: +150% }
+
+/* Incremental elements */
+/* By default, visible */
+.incremental > * { opacity: 1; }
+/* The current item */
+.incremental > *[aria-selected] { opacity: 1; }
+/* The items to-be-selected */
+.incremental > *[aria-selected] ~ * { opacity: 0; }
+
+.loading {
+  display: block;
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: red;
+}
+
+body.loaded .loading {
+  display: none;
+}
+
+.slide {
+  color: var(--primary);
+  background-color: var(--background);
+  font-size: 1rem;
+  width: 600px;
+  height: 450px;
+  padding: 0;
+}
+
+ul {
+  text-align: left;
+  margin-left: 1rem;
+  margin-right: auto;
+  list-style-type: disc;
+}
+
+.listWithImages li > ul {
+  padding-left: 2em;
+}
+
+.nobullet {
+  list-style-type: none;
+}
+
+.nobullet li::before {
+  content: "\200B";
+}
+
+
+ol {
+  text-align: left;
+  padding-right: 1rem;
+  margin-left: 2rem;
+  margin-right: auto;
+}
+
+.unmarked {
+  text-align: right;
+  list-style-type: none;
+}
+
+
+li {
+  padding-right: 1rem;
+  line-height: 140%;
+  min-width: 200px;
+}
+
+.slide a {
+  color: var(--primary);
+  text-decoration: none;
+}
+
+.slide a:hover, .slide a:active, .slide a:focus {
+  color: var(--secondary);
+}
+
+.sourceCode {
+  font-size: 14px;
+}
+
+.jumbogroup {
+  text-align: center;
+  margin-top: auto;
+  margin-bottom: auto;
+}
+
+.jumbo {
+  text-transform: uppercase;
+  display: inline-block;
+  transform-origin: 50% 0;
+  transform: translate3d(0, 0, 0);
+}
+
+img.bigimage, model-viewer.bigimage{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+}
+
+@media (prefers-color-scheme: dark) {
+  .darkmode {
+    background-color: black;
+  }
+}
+
+.prose {
+  margin-top: 5rem;
+}
+
+img.center, svg.center {
+  left: 50%;
+  margin-bottom: 3px;
+  margin-right: -50%;
+  margin-top: 25%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+  width: 300px;
+}
+
+img.right {
+  right: 50%;
+  margin-bottom: 2rem;
+  margin-top: 14rem;
+  margin-right: -50%;
+  position: absolute;
+  transform: translate(-50%, -50%);
+}
+
+.float-right {
+  float: right;
+}
+
+.spaced > * {
+  margin-bottom: 2rem;
+}
+
+/*
+.sourceCode span.fu, .sourceCode span.kw, .sourceCode span.dv {
+    color: var(--primary);
+}
+.sourceCode span.dt, .sourceCode span.st, .sourceCode span.ch {
+    color: var(--primary);
+}
+.sourceCode span.ot, .sourceCode span.co, .sourceCode span.op {
+    color: var(--primary);
+}
+*/
+
+.author {
+  margin-bottom: 2rem;
+}
+
+.logos {
+  margin-top: 3.2rem;
+}
+
+.unmarked-list {
+  list-style-type: none;
+}
+
+.title-slide h1 {
+  font-size: 4rem;
+}
+
+.title-slide .authors {
+  position: absolute;
+  bottom: 2rem;
+  right: 2rem;
+}
+
+.author-slide h1 {
+  text-align: left;
+  font-size: 3rem;
+}
+
+h1 {
+  margin-top: 2em;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--header);
+  font-family: "P22 Johnston Underground", sans-serif;
+}
+
+h2 {
+  text-align: center;
+  font-size: 2rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--header);
+  font-family: "P22 Johnston Underground", sans-serif;
+}
+
+h3 {
+  text-align: left;
+  font-size: 1.5rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--header);
+  font-family: "P22 Johnston Underground", sans-serif;
+}
+
+h4 {
+  text-align: left;
+  font-size: 1.4rem;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  color: var(--header);
+  font-family: "P22 Johnston Underground", sans-serif;
+}
+
+.author {
+  font-size: 2rem;
+  font-weight: 600;
+  color: maroon;
+}
+
+.author-desc {
+  margin-top: 0.7rem;
+}
+
+.presentation {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.solid-left-side {
+  border-left: 4px solid var(--primary);
+}
+
+.solid-left-side .text {
+  margin-left: 1rem;
+}
+
+pre {
+  padding: 1rem;
+}
+
+.overlay {
+  color: var(--primary);
+  z-index: 10000;
+  position: absolute;
+  bottom: 0.5rem;
+  right: 1rem;
+  text-shadow: 
+    0px -1px 0px white,
+    0px 1px 0px white,
+    1px 1px 0px white,
+    1px 0px 0px white,
+    1px -1px 0px white,
+    -1px 1px 0px white,
+    -1px 0px 0px white,
+    -1px -1px 0px white;
+}
+
+.slide[aria-selected=true]~.overlay {
+  display: none;
+}
+
+.big-1 {
+  font-size: 1.7rem;
+  font-weight: 500;
+}
+
+.big-2 {
+  font-size: 2.0rem;
+  font-weight: 500;
+}
+
+.big-3 {
+  font-size: 2.3rem;
+  font-weight: 600;
+}
+
+.smaller-picture p img {
+  height: 300px;
+  width: 600px;
+}
+
+dd {
+  margin-left: 2rem;
+  margin-bottom: 1rem;
+}
+
+dd.explicit-list {
+  list-style: disc;
+}
+
+blockquote p {
+  font-size: 1rem;
+  font-style: italic;
+}
+
+.slide blockquote {
+  border-left: 1px solid maroon;
+  padding-left: 0.5em;
+  margin: 0 6em;
+}
+
+blockquote::before {
+  content: "\201C";
+  color: maroon;
+  font-size:  100px;
+  margin: -30px 0 -70px 0;
+  font-family: 'Playfair Display', serif;
+  float: left;
+}
+
+.attribution {
+   text-align: right;
+   padding-right: 2.5em;
+}
+
+.horizontally-centered {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+div.imagegrid {
+  display: flex;
+  flex-wrap: wrap;
+  text-align: center;
+  padding: 0.5em
+}
+
+.ingrid {
+  max-width: 100%;
+  width: 140px;
+  object-fit: scale-down;
+}
+
+code.sourceCode {
+  font-family: 'Share Tech Mono', monospace;
+}
+
+div.sourceCode {
+    position: absolute; 
+    top: 50%;
+    transform: translate(0, -50%);
+}
+
+embed {
+    transform-origin: top center;
+    transform: scale(90%);
+}
+
+.sideBySide {
+  width: min-content;
+  display: inline-block;
+  text-align: center;
+  margin:auto;
+}
+.center {
+  text-align: center;
+}
+
+.qrcode {
+  display: block;
+}
+
+.listWithImages li * {
+  vertical-align: middle;
+}
