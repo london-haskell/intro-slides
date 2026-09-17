@@ -29,6 +29,12 @@ berlin code of conduct: https://berlincodeofconduct.org/en
 
 ---
 
+# Staff Applied Scientist 
+
+[QR_CODE_HERE](https://permutive.com/careers?ashby_department_id=cdf3b490-2259-4488-bc24-ab059ed27e51&ashby_jid=44741325-16f8-4f42-9b56-63b15a0dafc1){.qrcode .horizontally-centered width=300px height=300px}
+
+---
+
 # Join the Discord
 
 [QR_CODE_HERE](https://discord.gg/ABy7Hy2z8k){.qrcode .horizontally-centered}
