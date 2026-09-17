@@ -35,6 +35,16 @@ berlin code of conduct: https://berlincodeofconduct.org/en
 
 ---
 
+![](assets/images/lambda-world.svg){.horizontally-centered width=80%}
+
+## The Fun-Fun * Functional Programming Experience! 
+
+* 29-30 October, 2026
+* Malaga. Spain 
+* Discount Code: Hask3llL0nd0NY4Y
+
+---
+
 # Join the Discord
 
 [QR_CODE_HERE](https://discord.gg/ABy7Hy2z8k){.qrcode .horizontally-centered}
