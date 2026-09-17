@@ -12,7 +12,9 @@ import Data.Vector.Unboxed ((!?))
 
 genQRCodeSVG :: Int -> Double -> QR.QRImage -> Svg.Document
 genQRCodeSVG borderW scaleFactor (QR.QRImage {..}) =
-    let s = Svg.Px (scaleFactor * (fromIntegral borderW * 2 + fromIntegral qrImageSize))
+    let 
+        size = (scaleFactor * (fromIntegral borderW * 2 + fromIntegral qrImageSize))
+        s = Svg.Px size
         black = Svg.ColorRef (PixelRGBA8 0 0 153 0)
         attrs = 
             Svg.defaultSvg 
@@ -31,7 +33,8 @@ genQRCodeSVG borderW scaleFactor (QR.QRImage {..}) =
             , y <- [0..qrImageSize - 1] 
             , qrImageData !? (x + y * qrImageSize) == Just True
             ]
-     in Svg.Document Nothing (Just s) (Just s) tree mempty mempty mempty mempty
+
+     in Svg.Document (Just (0, 0, size, size)) (Just s) (Just s) tree mempty mempty mempty mempty
 
 errorDocument :: Svg.Document
 errorDocument = 
