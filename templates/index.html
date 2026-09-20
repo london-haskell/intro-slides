@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+ <head>
+  <title>London Haskell</title>
+  <link rel="stylesheet" href="/assets/css/style.css">
+ </head>
+ <body>
+    <h1>London Haskell</h1>
+    <img src="/assets/images/logo.svg" width="300px">
+    <div id="events">
+        <h2>Events</h2>
+        <ul>
+         $for(events)$
+            <li>
+                $date$ @ $location$
+                <ul>
+                    <li><a href="$url$">Introductory Slides</a></li>
+                    <li><a href="$event-page$">Event Page</a></li>
+                </ul>
+            </li>
+         $endfor$
+        </ul>
+    </p>
+ </body>
+</html>

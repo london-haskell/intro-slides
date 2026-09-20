@@ -1,6 +1,6 @@
 cabal-version: 2.2
 
--- This file has been generated from package.yaml by hpack version 0.38.1.
+-- This file has been generated from package.yaml by hpack version 0.39.6.
 --
 -- see: https://github.com/sol/hpack
 
@@ -43,6 +43,7 @@ library
     , directory
     , doctemplates
     , fsnotify
+    , hakyll
     , lens
     , linear
     , megaparsec
@@ -76,6 +77,7 @@ executable london-haskell-intro-exe
     , directory
     , doctemplates
     , fsnotify
+    , hakyll
     , lens
     , linear
     , london-haskell-intro

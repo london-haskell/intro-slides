@@ -6,16 +6,10 @@ $else$
 $endif$
 <head>
 <meta charset="utf-8">
-$for(author-meta)$
-  <meta name="author" content="$author-meta$" />
-$endfor$
-$if(date-meta)$
-  <meta name="dcterms.date" content="$date-meta$" />
-$endif$
-  <title>$if(title-prefix)$$title-prefix$ - $endif$$if(pagetitle)$$pagetitle$$endif$</title>
+<title>$if(title-prefix)$$title-prefix$ - $endif$$if(pagetitle)$$pagetitle$$endif$</title>
 $if(highlighting-css)$
   <style type="text/css">
-$highlighting-css$
+  $highlighting-css$
   </style>
 $endif$
 <link href="https://fonts.googleapis.com/css?family=Roboto&amp;display=swap" rel="stylesheet">
@@ -23,11 +17,14 @@ $endif$
 <link href="https://fonts.googleapis.com/css2?family=Noto+Color+Emoji&amp;family=Noto+Emoji:wght@300..700&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Share+Tech+Mono&amp;display=swap" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/assets/css/variables.css" type"text/css"/>
+<link rel="stylesheet" href="/assets/css/slides.css" type"text/css"/>
 $if(css)$
 $for(css)$
   <link rel="stylesheet" href="$css$" $if(html5)$$else$type="text/css" $endif$/>
 $endfor$
 $else$
+<style>
   $if(ratio43)$
   body.loaded {
     height: 450px;
@@ -47,9 +44,11 @@ $endif$
 $if(math)$
   $math$
 $endif$
-$for(header-includes)$
-  $header-includes$
-$endfor$
+$if(header-includes)$
+  $for(header-includes)$
+    $header-includes$
+  $endfor$
+$endif$
 <script type="module" src="https://ajax.googleapis.com/ajax/libs/model-viewer/4.0.0/model-viewer.min.js"></script>
 </head>
 <body>
@@ -71,33 +70,20 @@ $dzslides-core$
   }
   $endif$
 </style>
-$if(title)$
-<section class="slide title-slide">
-  <div>
-  <h1 class="title">$title$</h1>
-  <h3 class="subtitle">$subtitle$</h3></h3>
-  <footer class="authors">
-  <div class="notes" role="note">
-      $introductory_notes$
-  </div>
-$for(author)$
-  <div class="author">$author.name$</div>
-$endfor$
-  </footer>
-  </div>
-</section>
-$endif$
 $if(overlay)$
 <div class="overlay">$overlay$</div>
 $endif$
-$for(include-before)$
-$include-before$
-$endfor$
+$if(include-before)$
+ $for(include-before)$
+  $include-before$
+ $endfor$
+$endif$ 
 $body$
-$for(include-after)$
-$include-after$
-$endfor$
-
+$if(include-after)$
+ $for(include-after)$
+  $include-after$
+ $endfor$
+$endif$
 <script>
   function makeJumbo(slide) {
     const nodes = slide.querySelectorAll(".jumbo");

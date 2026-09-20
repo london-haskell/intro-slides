@@ -1,4 +1,6 @@
 .stack-work/
+_site/**
+_cache/**
 output
 dist-newstyle
 *~

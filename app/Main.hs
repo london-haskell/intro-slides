@@ -1,97 +1,73 @@
 module Main (main) where
 
+import Hakyll
 
-import Text.Pandoc
-import qualified Data.Text.IO as T
-import Data.Text (Text)
+import qualified Text.Pandoc as P
 import qualified Data.Text as T
-import qualified Data.Map as M
-import Text.DocTemplates
-import AddSlideDiv (addSlideDiv)
 import AddQRCode (addQRCode)
-import qualified System.FSNotify as FSNotify
-import Control.Concurrent (threadDelay)
-import Control.Monad (forever, unless)
-import Control.Arrow ((&&&), Kleisli (..))
-import Options.Applicative
-import Text.Pandoc.Highlighting
-import System.Directory (createDirectoryIfMissing)
-import System.Process (callProcess)
 import Data.Function ((&))
-parseInput :: Text -> IO Pandoc
-parseInput txt =
-    let readerOptions = def 
-            { readerExtensions = pandocExtensions 
-                & disableExtension Ext_auto_identifiers
-            , readerStandalone = True
-            }
-    in runIOorExplode $ 
-        readMarkdown readerOptions txt 
 
-printSlides :: Pandoc -> Template Text -> Text -> IO Text
-printSlides doc template dzcore = 
-    let
-        writerOptions = def
-            { writerTemplate = Just template
-            , writerReferenceLinks = True
-            , writerSlideLevel = Just 1
-            , writerVariables = Context (M.singleton "dzslides-core" (toVal dzcore))
-            }
-    in runIOorExplode $ 
-            writeDZSlides writerOptions doc
-
-printHTML :: Pandoc -> Template Text -> IO Text
-printHTML doc template = let
-        writerOptions = def
-            { writerTemplate = Just template
-            , writerReferenceLinks = True
-            , writerHighlightStyle = Just pygments
-            , writerVariables = 
-               Context (M.singleton "highlighting-css" (toVal $ T.pack $ styleToCss pygments))
-            }
-    in runIOorExplode $ 
-            writeHtml5String writerOptions doc
-
-compileSlides :: Pandoc -> IO ()
-compileSlides doc = do
-    templateTxt <- T.readFile "template.html" 
-    dzcoreTxt <- T.readFile "dz-core.html" 
-    template <- either error id <$> compileTemplate "." templateTxt
-    T.writeFile "output/slides.html" =<< printSlides doc template dzcoreTxt
-
-compileOverview :: Pandoc -> IO ()
-compileOverview doc = do
-    templateTxt <- T.readFile "index-template.html" 
-    template <- either error id <$> compileTemplate "." templateTxt
-    T.writeFile "output/index.html" =<< printHTML doc template
-
-copyFiles :: IO ()
-copyFiles = do
-    callProcess "cp" ["-R", "assets", "output/assets"]
-    callProcess "cp" ["onstage.html", "output/onstage.html"]
-
-
-rebuild :: IO ()
-rebuild = do 
-    putStrLn "rebuilding"
-    createDirectoryIfMissing True "output/generated"
-    _ <- (runKleisli $ Kleisli compileSlides &&& Kleisli (compileOverview . addSlideDiv))
-         . addQRCode
-         =<< parseInput
-         =<< T.readFile "Presentation.md"
-    copyFiles
-    putStrLn "done"
+extractTitleLocation :: String -> String
+extractTitleLocation =T.unpack . T.intercalate "-". drop 3 . T.splitOn "-" .  T.pack
 
 main :: IO ()
-main = do
-    once <- execParser $ 
-        info (switch (long "once") <**> helper)
-            ( fullDesc <> progDesc "do the thing")
-    rebuild
-    unless once $
-        FSNotify.withManager $ \mgr -> do
-            FSNotify.watchDir mgr "Presentation.md" (const True) (const rebuild)
-            -- sleep until interrupted
-            forever $ threadDelay 1000000
+main = hakyll $ do
+    match "assets/**" $ do
+        route idRoute
+        compile copyFileCompiler
+    
+    match "events/*.md" $ version "raw" $ do
+        route idRoute
+        compile copyFileCompiler
+
+    match "resources/*" $ do
+        route idRoute
+        compile $ do
+            getResourceBody >>= saveSnapshot "resource"
+
+    match "templates/*" $ compile templateBodyCompiler
+        
+    create ["index.html"] $ do
+        route idRoute
+        compile $ do
+            let ctx = defaultContext
+                    <> listField 
+                            "events" 
+                            ((urlField "url"
+                                <> dateField "date" "%B, %Y"
+                                <> (mapContext (extractTitleLocation) $ titleField "location")
+                                <> metadataField
+                            ) :: Context String) 
+                            (recentFirst =<< loadAllSnapshots ("events/*.md" .&&. hasNoVersion) "rendered")
+
+            makeItem ""
+                >>= loadAndApplyTemplate "templates/index.html" ctx
+
+    match "events/*.md" $ do
+        let readerOptions = defaultHakyllReaderOptions
+                { P.readerExtensions = P.pandocExtensions 
+                    & P.disableExtension P.Ext_auto_identifiers
+                , P.readerStandalone = True
+                }
+            writerOptions = defaultHakyllWriterOptions
+                { P.writerReferenceLinks = True
+                , P.writerSlideLevel = Just 1
+                }
+        route $ setExtension "html"
+        compile $ do
+            dzCore <- loadBody "resources/dz-core.html"
+            let ctx = defaultContext
+                    <> constField "dzslides-core" dzCore
+
+            getResourceBody 
+                >>= readPandocWith readerOptions
+                >>= traverse (pure . addQRCode)
+                >>= traverse (either (error .show) (pure . T.unpack) . P.runPure . (P.writeDZSlides writerOptions))
+                >>= saveSnapshot "rendered"
+                >>= loadAndApplyTemplate "templates/slides.html" ctx
+
+
+                
+
     
 

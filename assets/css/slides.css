@@ -1,6 +1,6 @@
 @font-face {
   font-family: "P22 Johnston Underground"; /* set name */
-  src: url(../fonts/underground.ttf); /* url of the font */
+  src: url(../fonts/underground.woff); /* url of the font */
 }
 
 :root {

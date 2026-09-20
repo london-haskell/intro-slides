@@ -1,18 +1,15 @@
 ---
-css:
-  - ./assets/css/variables.css
-  - ./assets/css/styles.css
 light: true
 ratio43: true
 embed-css: true
 #display-notes: true
-overlay: 
+event-page: https://luma.com/70s76zly
 ---
 
 
 # London Haskell
 
-![](assets/images/logo.svg){class=center}
+![](/assets/images/logo.svg){class=center}
 
 :::notes
 berlin code of conduct: https://berlincodeofconduct.org/en
@@ -22,7 +19,7 @@ berlin code of conduct: https://berlincodeofconduct.org/en
 
 # Permutive
 
-![](assets/images/permutive.svg){class=center}
+![](/assets/images/permutive.svg){class=center}
 
 :::notes
 :::
@@ -35,7 +32,7 @@ berlin code of conduct: https://berlincodeofconduct.org/en
 
 ---
 
-![](assets/images/lambda-world.svg){.horizontally-centered width=80%}
+![](/assets/images/lambda-world.svg){.horizontally-centered width=80% style="margin-top:1em"}
 
 ## The Fun-Fun * Functional Programming Experience! 
 
@@ -66,6 +63,4 @@ berlin code of conduct: https://berlincodeofconduct.org/en
 
 :::notes
 :::
-
----
 

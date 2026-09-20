@@ -1,0 +1,29 @@
+@font-face {
+  font-family: "P22 Johnston Underground"; /* set name */
+  src: url(../fonts/underground.woff); /* url of the font */
+}
+
+:root, body {
+  font-family: "P22 Johnston Underground", sans-serif;
+  text-align: center;
+  color: black;
+  background-color: white;
+}
+
+a{
+ color: #0098d8;
+}
+
+a:visited {
+    color: #000099;
+}
+
+h1 {
+    color: #000099;
+}
+
+#events {
+    text-align: left;
+    max-width: 30em;
+    margin: 1em auto;
+}
