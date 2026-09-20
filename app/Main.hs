@@ -42,6 +42,7 @@ main = hakyll $ do
 
             makeItem ""
                 >>= loadAndApplyTemplate "templates/index.html" ctx
+                >>= relativizeUrls
 
     match "events/*.md" $ do
         let readerOptions = defaultHakyllReaderOptions
@@ -65,9 +66,4 @@ main = hakyll $ do
                 >>= traverse (either (error .show) (pure . T.unpack) . P.runPure . (P.writeDZSlides writerOptions))
                 >>= saveSnapshot "rendered"
                 >>= loadAndApplyTemplate "templates/slides.html" ctx
-
-
-                
-
-    
-
+                >>= relativizeUrls
