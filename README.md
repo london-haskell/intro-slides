@@ -1,6 +1,6 @@
 # London Haskell Intro
 
-These slides are for the introduction for the London Haskell meetup in September, at Permutive
+These slides are for the introduction for the London Haskell meetup
 
 The site is built with [Hakyll](https://jaspervdj.be/hakyll/) and deployed to
 GitHub Pages by `.github/workflows/pages.yml` on every push to `main`:
