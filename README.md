@@ -2,9 +2,9 @@
 
 These slides are for the introduction for the London Haskell meetup
 
-The site is built with [Hakyll](https://jaspervdj.be/hakyll/) and deployed to
-GitHub Pages by `.github/workflows/pages.yml` on every push to `main`:
-<https://london-haskell.github.io/intro-slides/>
+The site is built with [Hakyll](https://jaspervdj.be/hakyll/)
+
+It's deployed to <https://london-haskell.github.io/intro-slides/>
 
 To build locally:
 
