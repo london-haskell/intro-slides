@@ -10,6 +10,9 @@ import Data.Function ((&))
 extractTitleLocation :: String -> String
 extractTitleLocation =T.unpack . T.intercalate "-". drop 3 . T.splitOn "-" .  T.pack
 
+locationField :: Context String
+locationField = mapContext (extractTitleLocation) $ titleField "location"
+
 main :: IO ()
 main = hakyll $ do
     match "assets/**" $ do
@@ -35,7 +38,7 @@ main = hakyll $ do
                             "events" 
                             ((urlField "url"
                                 <> dateField "date" "%B, %Y"
-                                <> (mapContext (extractTitleLocation) $ titleField "location")
+                                <> locationField
                                 <> metadataField
                             ) :: Context String) 
                             (recentFirst =<< loadAllSnapshots ("events/*.md" .&&. hasNoVersion) "rendered")
@@ -59,6 +62,8 @@ main = hakyll $ do
             dzCore <- loadBody "resources/dz-core.html"
             let ctx = defaultContext
                     <> constField "dzslides-core" dzCore
+                    <> dateField "date" "%B, %Y"
+                    <> locationField
 
             getResourceBody 
                 >>= readPandocWith readerOptions
