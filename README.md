@@ -1,10 +1,10 @@
-# London Haskell Intro
+# London Haskell Website
 
-These slides are for the introduction for the London Haskell meetup
+This is the website of the London Haskell meetup.
 
 The site is built with [Hakyll](https://jaspervdj.be/hakyll/)
 
-It's deployed to <https://london-haskell.github.io/intro-slides/>
+It's deployed to <https://london-haskell.github.io/>
 
 To build locally:
 
